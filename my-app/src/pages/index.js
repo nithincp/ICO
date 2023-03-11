@@ -25,7 +25,7 @@ import {
 
     const getTokensToBeClaimed = async () => {
       try{
-        const provider = getProviderOrSigner()
+        const provider = await getProviderOrSigner()
         const nftContract = new Contract(
           NFT_CONTRACT_ADDRESS,
           NFT_CONTRACT_ABI,
@@ -39,6 +39,9 @@ import {
         const signer = await getProviderOrSigner(true)
         const address = await signer.getAddress()
         const balance = await nftContract.balanceOf(address)
+        
+        console.log("Inside the getTokensToBeClaimed function")
+
         if(balance === zero){
           setTokensToBeClaimed(zero)
         }
@@ -71,7 +74,7 @@ import {
         )
         
         const signer = await getProviderOrSigner(true)
-        const address = await signer.getSigner()
+        const address = await signer.getAddress()
         const balance = await tokenContract.balanceOf(address)
         setBalanceOfCryptoDevTokens(balance)
 
